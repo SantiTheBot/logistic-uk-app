@@ -18,21 +18,18 @@ const DriverList = () => {
     const toggleRow = (id) => {
         setOpenRow({ ...openRow, [id]: !openRow[id] });
     };
-    // Define days of the week for reference
     const DaysOfTheWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
-    // Styles for the day boxes
     const DayBox = styled(Box)(({ hasActivity }) => ({
         width: 30,
         height: 30,
         borderRadius: 4,
         backgroundColor: hasActivity ? '#486F38' : '#A42821',
-        display: 'inline-flex', 
+        display: 'inline-flex',
         justifyContent: 'center',
-        alignItems: 'center', 
-        color: hasActivity ? 'white' : 'black', 
+        alignItems: 'center',
+        color: hasActivity ? 'white' : 'black',
         margin: '0 2px',
-        fontWeight: 'bold', 
+        fontWeight: 'bold',
     }));
 
     const getActivitySummary = (activities) => {
@@ -42,13 +39,12 @@ const DriverList = () => {
         }, {});
     };
 
-    // In the drivers.map filtering, add search logic
     const filteredDrivers = drivers.filter(
         (driver) =>
             `${driver.forename} ${driver.surname}`.toLowerCase().includes(searchQuery) ||
             driver.vehicleRegistration.toLowerCase().includes(searchQuery)
     );
-    
+
     return (
         <TableContainer component={Paper}>
             <TextField
@@ -76,11 +72,11 @@ const DriverList = () => {
                         const daysWithActivity = DaysOfTheWeek.map((day) => {
                             const hasActivity = driver.traces.some((trace) => {
                                 const traceDate = parseISO(trace.date);
-                                return format(traceDate, 'EEEE') === day; 
+                                return format(traceDate, 'EEEE') === day;
                             });
                             return (
                                 <DayBox key={day} hasActivity={hasActivity}>
-                                    {day.charAt(0)} 
+                                    {day.charAt(0)}
                                 </DayBox>
                             );
                         });
