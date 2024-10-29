@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import {
     Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Collapse, IconButton,
     Paper,
@@ -106,6 +106,7 @@ const DriverList = () => {
                                                 </TableHead>
                                                 <TableBody>
                                                     {Object.entries(getActivitySummary(driver.traces.flatMap(t => t.activity)))
+                                                        .sort(([typeA], [typeB]) => typeA.localeCompare(typeB))
                                                         .map(([type, total]) => (
                                                             <TableRow key={type}>
                                                                 <TableCell>{type}</TableCell>
